@@ -4,6 +4,7 @@
     da API Guará/Trackmob
     
     author: Guaraci Falcão (guaraci.falcao@outlook.com)
+    github:Falcao74
     data: 08/02/2022
 
 */

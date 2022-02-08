@@ -5,7 +5,7 @@ from settings import db_server, db_name, db_user, db_password, db_port
 class Load:
 
     '''
-    | Classe responsável por carregar os registros no banco de dados.
+    | Classe responsável por carregar os registros no banco de dados MySQL.
     
     '''
     def __init__(self, normalized_data):

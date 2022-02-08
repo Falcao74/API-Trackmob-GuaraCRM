@@ -2,6 +2,7 @@ class Normalize:
 
     '''
     | Classe responsável por normalizar o retorno da API para os 4 objetos que é retornado (Doador, Doação, Pagamento e Endereço).
+    | O Endereço é unido ao doador durante a rotina.
     
     '''
     def __init__(self, raw_data):

@@ -1,7 +1,6 @@
 # Para instalar os requirements:
-# python -m venv env
-# source env/bin/activate (Linux) ou .\env\Scripts\activate (Windows)
 # pip install -r requirements.txt
+# Usar ambiente virtual
 
 certifi==2021.10.8
 charset-normalizer==2.0.11

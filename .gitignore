@@ -1,4 +1,4 @@
 settings.py
 pyvenv.cfg
-env
+.env
 

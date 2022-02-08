@@ -5,7 +5,7 @@ import requests
 
 class GuaraCRM:
     '''
-    | Classe responsável por fazer a interface com o GuaraCRM e retornar os registros.
+    | Classe responsável por fazer a interface com o GuaraCRM e retornar os registros da API.
     
     '''
     def __init__(self, token):
