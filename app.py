@@ -16,11 +16,20 @@ def main():
     inicio = datetime.datetime.now()
 
     while guara.has_next_page():
-        dados_puro = guara.perform(chunk_size = guara._chunk)
-        dados_normalizados = Normalize(dados_puro)
-        Load(dados_normalizados).perform()
-        print(f'..: Lote concluído :..\nInício: {inicio.hour} horas e {inicio.minute} minutos')
-
+        try:
+            dados_puro = guara.perform(chunk_size = guara._chunk)
+            dados_normalizados = Normalize(dados_puro)
+            Load(dados_normalizados).perform()
+            print(f'..: Lote concluído :..\nInício: {inicio.hour} horas e {inicio.minute} minutos')
+        except Exception as Argument:
+            if tries <= 0:
+                tries -= 1
+                f = open("erros.txt", "a")
+                f.write(str(Argument))
+                f.close()
+                break
+            continue 
+            
     final = datetime.datetime.now()
 
     print(
