@@ -2,6 +2,7 @@ from sqlalchemy import create_engine # type: ignore
 import pymysql # type: ignore
 import json
 import requests
+from retry import retry
 
 class GuaraCRM:
     '''
@@ -28,15 +29,18 @@ class GuaraCRM:
         ''' Verifica se possui próxima pagina para ser visitada'''
         return False if self._page is None else True
 
-    
+    @retry(exceptions = IOError, delay = 30.0, tries = 5)
     def hit(self):
         ''' Faz requisição para APi e retorna o conjunto de doadores'''
-        response = requests.get(self.url, headers=self._headers)
-        json = response.json()
-        self._page = json['metadata']['pagination']['next_page']  ##Seta qual a próxima pagina
-        self._total_pages = json['metadata']['pagination']['total_pages'] #Seta o total de páginas (apenas para demonstração)
-        return json['constituents']
-
+        try:
+            response = requests.get(self.url, headers=self._headers)
+            json = response.json()
+            self._page = json['metadata']['pagination']['next_page']  ##Seta qual a próxima pagina
+            self._total_pages = json['metadata']['pagination']['total_pages'] #Seta o total de páginas (apenas para demonstração)
+            return json['constituents']
+        except Exception as error:
+            print(f'Houve um erro no hit {error}')
+            raise IOError
     
     def perform(self, chunk_size):
         ''' Executa requisição para todas as paginas da API.'''
