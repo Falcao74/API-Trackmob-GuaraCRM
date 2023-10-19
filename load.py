@@ -16,7 +16,7 @@ class Load:
         self.pd_adresses = pd.json_normalize(normalized_data.adresses, sep='_')
         
         # usando list comprehension, evitar que qualquer coluna que tenha um nome maior do que o limite do MySQL.
-        limit = 60
+        limit = 50
         self.pd_payments = self.pd_payments.loc[:, [x for x in self.pd_payments.columns if len(x) < limit]]
 
         # Cria conexção com o banco
